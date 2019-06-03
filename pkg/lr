@@ -1,0 +1,21 @@
+[mirrors]
+https://github.com/leahneukirchen/lr/archive/v1.4.1.tar.gz
+
+[vars]
+filesize=37131
+sha512=da42fd08461a4e5aae008804d3870fc3d04ee8f2ffb55b5ec48d758eb522087c454ca9c7e4a84e234a8cb122d609da91e792313eed164f4e90af37a4a65b9fb3
+pkgver=1
+tardir=lr-1.4.1
+
+[deps]
+
+[build]
+mk_target() {
+make -j$MAKE_THREADS \
+  CC="$CC" AR="$CROSS_COMPILE"ar CFLAGS="$optcflags" \
+  LDFLAGS="$optldflags -Wl,-rpath-link=$butch_root_dir$butch_prefix/lib" \
+  PREFIX="$butch_prefix" DESTDIR="$butch_install_dir" \
+  "$1"
+}
+mk_target all
+mk_target install
