@@ -95,9 +95,11 @@ else
 	xconfflags="--host=$machine --target=$machine --build=$machine $GCC_ARCH_CONFIG_FLAGS"
 fi
 
-extralangs=
-extrainst=
-[ "$option_java" = 1 ] && extralangs=,java && extrainst=install-target-libjava \
+extralangs=,fortran
+extrainst="install-target-libgfortran"
+[ "$option_java" = 1 ] \
+&& extralangs="$extralangs,java" \
+&& extrainst="$extrainst install-target-libjava" \
 && cp -f "$C"/ecj-"$ECJ_VERSION".jar ./ecj.jar
 
 
@@ -127,6 +129,7 @@ LDFLAGS_FOR_TARGET="-s $config_arch_target_ldflags" \
   --disable-gnu-indirect-function \
   --disable-libmpx \
   --disable-libquadmath \
+  --disable-libquadmath-support \
   --enable-libstdcxx-time \
   --enable-lto \
   --with-system-zlib \
@@ -188,6 +191,7 @@ fi
 
 ln -sf gcc "$dest"/bin/gcc-$VERSION
 ln -sf g++ "$dest"/bin/g++-$VERSION
+ln -sf gfortran "$dest"/bin/gfortran-$VERSION
 
 rm "$butch_install_dir""$butch_prefix"/lib/*.la
 

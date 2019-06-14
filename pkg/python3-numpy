@@ -1,0 +1,19 @@
+[mirrors]
+https://pypi.python.org/packages/source/n/numpy/numpy-1.16.4.zip
+
+[vars]
+filesize=5122740
+sha512=5b2848ef38d79a9d416425a22602dd45aa665df996908015f32fb7477e37aa5968009cb27b3e1bdcf24ce7c0c39bafa3ff380cb45a766c1f530483f88921df21
+
+[deps.run]
+lapack
+python3
+
+[deps.host]
+python3
+
+[build]
+export CFLAGS="$optcflags"
+python3 setup.py build
+python3 setup.py install --prefix="$butch_prefix" \
+       --root="$butch_install_dir"
